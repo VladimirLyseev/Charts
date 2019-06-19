@@ -53,7 +53,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     // [CGRect] per dataset
     private var _buffers = [Buffer]()
 
-    var cornerRadius: CGFloat = 0.0
+    public var cornerRadius: CGFloat = 0.0
     
     open override func initBuffers()
     {
