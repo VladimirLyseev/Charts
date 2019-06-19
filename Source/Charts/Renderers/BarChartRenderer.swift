@@ -53,7 +53,9 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     // [CGRect] per dataset
     private var _buffers = [Buffer]()
 
-    public var cornerRadius: CGFloat = 0.0
+    public var maxCornerRadius: CGFloat = 0.0
+    public var minCornerRadius: CGFloat = 0.0
+    public var minBorderHeightForSwitchToMinCornerRadius: CGFloat = 0.0
     
     open override func initBuffers()
     {
@@ -424,6 +426,8 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 // Set the color for the currently drawn value. If the index is out of bounds, reuse colors.
                 context.setFillColor(dataSet.color(atIndex: j).cgColor)
             }
+
+          let cornerRadius = barRect.height < minBorderHeightForSwitchToMinCornerRadius ? minCornerRadius : maxCornerRadius
 
           if cornerRadius > 0.0 {
             let bezierPath = UIBezierPath(roundedRect: barRect, byRoundingCorners: UIRectCorner.allCorners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
